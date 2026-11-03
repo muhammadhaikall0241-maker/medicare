@@ -9,6 +9,27 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    // Membuat slug unik
+    private function generateUniqueSlug(string $name, ?int $ignoreId = null): string
+    {
+        $baseSlug = Str::slug($name);
+        $slug = $baseSlug;
+        $counter = 2;
+
+        while (
+            Product::where('slug', $slug)
+                ->when($ignoreId, function ($query) use ($ignoreId) {
+                    $query->where('id', '!=', $ignoreId);
+                })
+                ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
+    }
+
     // Menampilkan semua obat
     public function index()
     {
@@ -39,7 +60,7 @@ class ProductController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
 
-        $validated['slug'] = Str::slug($validated['name']);
+        $validated['slug'] = $this->generateUniqueSlug($validated['name']);
 
         $product = Product::create($validated);
 
@@ -83,7 +104,10 @@ class ProductController extends Controller
         ]);
 
         if (isset($validated['name'])) {
-            $validated['slug'] = Str::slug($validated['name']);
+            $validated['slug'] = $this->generateUniqueSlug(
+                $validated['name'],
+                (int) $id
+            );
         }
 
         $product->update($validated);
