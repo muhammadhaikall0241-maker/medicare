@@ -1,66 +1,188 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MEDICARE — Sistem Manajemen Apotek Terintegrasi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**MEDICARE** merupakan aplikasi berbasis web yang dikembangkan untuk membantu pengelolaan data dan operasional administrasi apotek secara terintegrasi. Aplikasi ini dibangun menggunakan framework **Laravel** dengan **MySQL** sebagai sistem basis data serta REST API untuk mendukung pertukaran data dalam format JSON.
 
-## About Laravel
+Project ini dikembangkan sebagai tugas kelompok mata kuliah **Teknologi Sistem Terintegrasi** di Politeknik Negeri Lhokseumawe.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Fitur Utama
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Manajemen Pelanggan** — Mengelola identitas pelanggan, alamat, dan nomor telepon.
+- **Manajemen Staf** — Menyimpan dan memperbarui informasi staf apotek, termasuk data kelahiran dan kontak.
+- **Manajemen Obat** — Mengelola kode obat, nama, kategori, merek, harga, jumlah stok, serta tanggal kedaluwarsa.
+- **Pengelolaan Inventaris** — Mencatat aktivitas stok masuk dan stok keluar secara terstruktur.
+- **Riwayat Pergerakan Stok** — Menampilkan catatan perubahan persediaan obat.
+- **Validasi Data** — Memastikan input sesuai aturan dan mencegah pengeluaran stok melebihi persediaan.
+- **Dashboard Interaktif** — Menyediakan tampilan manajemen dengan navigasi dan visualisasi data.
+- **REST API** — Menyediakan akses data melalui endpoint JSON yang dapat diuji menggunakan Postman.
+- **Integrasi GitHub** — Mendukung pengelolaan kode sumber dan kolaborasi pengembangan.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Teknologi yang Digunakan
 
-## Learning Laravel
+| Teknologi | Kegunaan |
+|---|---|
+| PHP | Bahasa pemrograman backend |
+| Laravel 12 | Framework aplikasi |
+| MySQL | Sistem basis data |
+| HTML, CSS, JavaScript | Pengembangan antarmuka |
+| Blade | Template engine Laravel |
+| Postman | Pengujian REST API |
+| Git & GitHub | Version control dan kolaborasi |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Persyaratan Sistem
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Sebelum menjalankan aplikasi, pastikan perangkat sudah memiliki:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.2 atau lebih baru.
+- Composer.
+- MySQL / XAMPP.
+- Git.
+- Web browser.
+- Postman (untuk pengujian API).
 
-## Laravel Sponsors
+## Instalasi dan Menjalankan Aplikasi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Clone Repository
 
-### Premium Partners
+```bash
+git clone https://github.com/Guard-69/medicare.git
+cd medicare
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 2. Instal Dependensi
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Konfigurasi Environment
 
-## Code of Conduct
+Salin file konfigurasi:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Windows PowerShell:
+```powershell
+Copy-Item .env.example .env
+```
 
-## Security Vulnerabilities
+Kemudian sesuaikan konfigurasi database pada `.env`:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=medicare
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## License
+### 4. Generate Application Key
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan key:generate
+```
+
+### 5. Persiapkan Database
+
+Buat database bernama `medicare` melalui phpMyAdmin atau MySQL.
+
+Jalankan migrasi:
+
+```bash
+php artisan migrate
+```
+
+### 6. Jalankan Server Laravel
+
+```bash
+php artisan serve
+```
+
+Buka aplikasi melalui browser:
+
+http://127.0.0.1:8000
+
+Pastikan layanan MySQL pada XAMPP sudah aktif.
+
+## REST API
+
+API MEDICARE menggunakan format pertukaran data JSON dengan prefix `/api`.
+
+| Method | Endpoint | Keterangan |
+|---|---|---|
+| GET | `/api/customers` | Menampilkan data pelanggan |
+| POST | `/api/customers` | Menambahkan pelanggan |
+| GET | `/api/customers/{id}` | Melihat detail pelanggan |
+| PUT/PATCH | `/api/customers/{id}` | Memperbarui pelanggan |
+| DELETE | `/api/customers/{id}` | Menghapus pelanggan |
+| GET | `/api/staff` | Menampilkan data staf |
+| POST | `/api/staff` | Menambahkan staf |
+| GET | `/api/staff/{id}` | Melihat detail staf |
+| PUT/PATCH | `/api/staff/{id}` | Memperbarui staf |
+| DELETE | `/api/staff/{id}` | Menghapus staf |
+| GET | `/api/products` | Menampilkan data obat |
+| POST | `/api/products` | Menambahkan obat |
+| GET | `/api/products/{id}` | Melihat detail obat |
+| PUT/PATCH | `/api/products/{id}` | Memperbarui obat |
+| DELETE | `/api/products/{id}` | Menghapus obat |
+| GET | `/api/stock-movements` | Melihat riwayat stok |
+| POST | `/api/stock-movements` | Mencatat perubahan stok |
+| GET | `/api/stock-movements/{id}` | Melihat detail pergerakan stok |
+
+### Pengujian API dengan Postman
+
+Untuk melakukan pengujian:
+
+1. Jalankan server Laravel.
+2. Buka aplikasi Postman.
+3. Masukkan alamat endpoint sesuai kebutuhan.
+4. Pilih HTTP method yang sesuai.
+5. Tambahkan header:
+
+```text
+Accept: application/json
+Content-Type: application/json
+```
+
+6. Untuk operasi POST dan PUT, masukkan data pada bagian Body dengan format JSON.
+7. Kirim request dan periksa HTTP status serta respons yang diberikan server.
+
+## Struktur Direktori Project
+
+```text
+medicare/
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       └── Api/
+│   └── Models/
+├── bootstrap/
+├── database/
+│   ├── migrations/
+│   ├── factories/
+│   └── seeders/
+├── public/
+├── resources/
+│   └── views/
+├── routes/
+│   ├── web.php
+│   └── api.php
+├── storage/
+├── tests/
+├── .env.example
+├── artisan
+└── composer.json
+```
+
+## Pengembangan dan Kolaborasi
+
+Project dikelola menggunakan Git dan GitHub untuk menyimpan perubahan kode, memantau riwayat pengembangan, serta memungkinkan anggota kelompok bekerja bersama melalui fitur repository collaboration.
+
+## Pengembang
+
+Project Kelompok — Mata Kuliah Teknologi Sistem Terintegrasi
+
+**Program Studi:** Teknologi Rekayasa Komputer dan Jaringan  
+**Institusi:** Politeknik Negeri Lhokseumawe
+
+---
+
+*MEDICARE — Integrated Pharmacy Management System.*
