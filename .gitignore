@@ -21,3 +21,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# MEDICARE backup files
+*.backup
+*backup*.blade.php

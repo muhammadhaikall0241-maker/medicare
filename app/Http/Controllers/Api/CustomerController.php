@@ -12,12 +12,10 @@ class CustomerController extends Controller
     // Menampilkan semua pelanggan
     public function index()
     {
-        $customers = Customer::latest()->get();
-
         return response()->json([
             'success' => true,
             'message' => 'Daftar pelanggan berhasil diambil.',
-            'data' => $customers
+            'data' => Customer::latest()->get()
         ], 200);
     }
 
@@ -25,10 +23,39 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'customer_code' => 'nullable|string|max:255|unique:customers,customer_code',
-            'name' => 'required|string|max:255',
-            'address' => 'required|string',
-            'phone' => 'required|string|max:20',
+            'customer_code' => [
+                'nullable',
+                'string',
+                'max:30',
+                'unique:customers,customer_code'
+            ],
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+                "regex:/^[\p{L}\s'.-]+$/u"
+            ],
+            'address' => [
+                'required',
+                'string',
+                'min:5',
+                'max:1000'
+            ],
+            'phone' => [
+                'required',
+                'string',
+                'regex:/^(?:\+62|62|0)[0-9]{8,13}$/'
+            ],
+        ], [
+            'customer_code.unique' => 'Kode pelanggan sudah digunakan.',
+            'name.required' => 'Nama pelanggan wajib diisi.',
+            'name.regex' => 'Nama hanya boleh berisi huruf, spasi, titik, tanda petik, dan tanda hubung.',
+            'name.max' => 'Nama maksimal 100 karakter.',
+            'address.required' => 'Alamat wajib diisi.',
+            'address.min' => 'Alamat minimal 5 karakter.',
+            'address.max' => 'Alamat maksimal 1000 karakter.',
+            'phone.required' => 'Nomor HP wajib diisi.',
+            'phone.regex' => 'Nomor HP harus menggunakan format Indonesia, misalnya 081234567890 atau +6281234567890.',
         ]);
 
         $validated['customer_code'] = $validated['customer_code']
@@ -61,10 +88,42 @@ class CustomerController extends Controller
         $customer = Customer::findOrFail($id);
 
         $validated = $request->validate([
-            'customer_code' => 'sometimes|required|string|max:255|unique:customers,customer_code,' . $id,
-            'name' => 'sometimes|required|string|max:255',
-            'address' => 'sometimes|required|string',
-            'phone' => 'sometimes|required|string|max:20',
+            'customer_code' => [
+                'sometimes',
+                'required',
+                'string',
+                'max:30',
+                'unique:customers,customer_code,' . $customer->id
+            ],
+            'name' => [
+                'sometimes',
+                'required',
+                'string',
+                'max:100',
+                "regex:/^[\p{L}\s'.-]+$/u"
+            ],
+            'address' => [
+                'sometimes',
+                'required',
+                'string',
+                'min:5',
+                'max:1000'
+            ],
+            'phone' => [
+                'sometimes',
+                'required',
+                'string',
+                'regex:/^(?:\+62|62|0)[0-9]{8,13}$/'
+            ],
+        ], [
+            'customer_code.required' => 'Kode pelanggan wajib diisi.',
+            'customer_code.unique' => 'Kode pelanggan sudah digunakan.',
+            'name.required' => 'Nama pelanggan wajib diisi.',
+            'name.regex' => 'Nama hanya boleh berisi huruf dan tanda baca yang diperbolehkan.',
+            'address.required' => 'Alamat wajib diisi.',
+            'address.min' => 'Alamat minimal 5 karakter.',
+            'phone.required' => 'Nomor HP wajib diisi.',
+            'phone.regex' => 'Format nomor HP tidak valid. Contoh: 081234567890.',
         ]);
 
         $customer->update($validated);
@@ -72,7 +131,7 @@ class CustomerController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Data pelanggan berhasil diperbarui.',
-            'data' => $customer
+            'data' => $customer->fresh()
         ], 200);
     }
 
