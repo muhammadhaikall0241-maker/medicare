@@ -44,7 +44,7 @@ Sebelum menjalankan aplikasi, pastikan perangkat sudah memiliki:
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/Guard-69/medicare.git
+git clone https://github.com/muhammadhaikall0241-maker/medicare.git
 cd medicare
 ```
 
