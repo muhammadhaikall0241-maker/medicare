@@ -1,54 +1,61 @@
 # MEDICARE — Sistem Manajemen Apotek Terintegrasi
 
-**MEDICARE** merupakan aplikasi berbasis web yang dikembangkan untuk membantu pengelolaan data dan operasional administrasi apotek secara terintegrasi. Aplikasi ini dibangun menggunakan framework **Laravel** dengan **MySQL** sebagai sistem basis data serta REST API untuk mendukung pertukaran data dalam format JSON.
+<p align="center">
+  <strong>Aplikasi Manajemen Apotek Berbasis Web dan REST API</strong>
+</p>
 
-Project ini dikembangkan sebagai tugas kelompok mata kuliah **Teknologi Sistem Terintegrasi** di Politeknik Negeri Lhokseumawe.
+MEDICARE merupakan aplikasi manajemen apotek terintegrasi yang dikembangkan menggunakan Laravel dan MySQL. Aplikasi ini dirancang untuk membantu pengelolaan data pelanggan, staf apotek, obat, serta persediaan stok secara lebih terstruktur.
 
-## Fitur Utama
+Project ini dikembangkan sebagai bagian dari pembelajaran **Teknologi Sistem Terintegrasi** di Program Studi Teknologi Rekayasa Komputer dan Jaringan, Politeknik Negeri Lhokseumawe.
 
-- **Manajemen Pelanggan** — Mengelola identitas pelanggan, alamat, dan nomor telepon.
-- **Manajemen Staf** — Menyimpan dan memperbarui informasi staf apotek, termasuk data kelahiran dan kontak.
-- **Manajemen Obat** — Mengelola kode obat, nama, kategori, merek, harga, jumlah stok, serta tanggal kedaluwarsa.
-- **Pengelolaan Inventaris** — Mencatat aktivitas stok masuk dan stok keluar secara terstruktur.
-- **Riwayat Pergerakan Stok** — Menampilkan catatan perubahan persediaan obat.
-- **Validasi Data** — Memastikan input sesuai aturan dan mencegah pengeluaran stok melebihi persediaan.
-- **Dashboard Interaktif** — Menyediakan tampilan manajemen dengan navigasi dan visualisasi data.
-- **REST API** — Menyediakan akses data melalui endpoint JSON yang dapat diuji menggunakan Postman.
-- **Integrasi GitHub** — Mendukung pengelolaan kode sumber dan kolaborasi pengembangan.
+## ✨ Fitur Utama
 
-## Teknologi yang Digunakan
+- **Manajemen Pelanggan** — Menambah, melihat, mengubah, dan menghapus data pelanggan.
+- **Manajemen Staf** — Mengelola informasi staf apotek.
+- **Manajemen Obat** — Mengelola kode obat, nama, kategori, harga, stok, dan tanggal kedaluwarsa.
+- **Manajemen Inventaris** — Mencatat penambahan dan pengeluaran stok obat.
+- **Riwayat Stok** — Menampilkan catatan perubahan persediaan.
+- **Validasi Data** — Memastikan data yang dimasukkan sesuai ketentuan.
+- **Dashboard** — Menyediakan antarmuka pengelolaan data apotek.
+- **REST API** — Mendukung pertukaran data menggunakan format JSON.
+
+## 🛠️ Teknologi yang Digunakan
 
 | Teknologi | Kegunaan |
 |---|---|
-| PHP | Bahasa pemrograman backend |
-| Laravel 12 | Framework aplikasi |
-| MySQL | Sistem basis data |
+| PHP 8.2+ | Bahasa pemrograman |
+| Laravel 12 | Framework backend |
+| MySQL | Database |
 | HTML, CSS, JavaScript | Pengembangan antarmuka |
-| Blade | Template engine Laravel |
+| Blade | Template Laravel |
 | Postman | Pengujian REST API |
-| Git & GitHub | Version control dan kolaborasi |
+| Git & GitHub | Version control |
 
-## Persyaratan Sistem
+## 📋 Persyaratan Instalasi
 
-Sebelum menjalankan aplikasi, pastikan perangkat sudah memiliki:
+Pastikan perangkat telah memiliki:
 
-- PHP 8.2 atau lebih baru.
-- Composer.
-- MySQL / XAMPP.
-- Git.
-- Web browser.
-- Postman (untuk pengujian API).
+- PHP versi 8.2 atau lebih baru
+- Composer
+- MySQL atau XAMPP
+- Git
+- Postman (untuk pengujian API)
 
-## Instalasi dan Menjalankan Aplikasi
+## 🚀 Cara Instalasi
 
 ### 1. Clone Repository
 
 ```bash
 git clone https://github.com/muhammadhaikall0241-maker/medicare.git
+```
+
+Masuk ke direktori project:
+
+```bash
 cd medicare
 ```
 
-### 2. Instal Dependensi
+### 2. Install Dependencies
 
 ```bash
 composer install
@@ -58,12 +65,11 @@ composer install
 
 Salin file konfigurasi:
 
-Windows PowerShell:
-```powershell
-Copy-Item .env.example .env
+```bash
+copy .env.example .env
 ```
 
-Kemudian sesuaikan konfigurasi database pada `.env`:
+Atur konfigurasi database pada file `.env`:
 
 ```env
 DB_CONNECTION=mysql
@@ -74,23 +80,21 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
+Buat database bernama `medicare` melalui phpMyAdmin atau MySQL.
+
 ### 4. Generate Application Key
 
 ```bash
 php artisan key:generate
 ```
 
-### 5. Persiapkan Database
-
-Buat database bernama `medicare` melalui phpMyAdmin atau MySQL.
-
-Jalankan migrasi:
+### 5. Jalankan Migration
 
 ```bash
 php artisan migrate
 ```
 
-### 6. Jalankan Server Laravel
+### 6. Jalankan Aplikasi
 
 ```bash
 php artisan serve
@@ -98,91 +102,83 @@ php artisan serve
 
 Buka aplikasi melalui browser:
 
+```text
 http://127.0.0.1:8000
+```
 
-Pastikan layanan MySQL pada XAMPP sudah aktif.
+## 🔌 REST API Endpoints
 
-## REST API
+Base URL:
 
-API MEDICARE menggunakan format pertukaran data JSON dengan prefix `/api`.
+```text
+http://127.0.0.1:8000/api
+```
 
-| Method | Endpoint | Keterangan |
+| Method | Endpoint | Fungsi |
 |---|---|---|
-| GET | `/api/customers` | Menampilkan data pelanggan |
-| POST | `/api/customers` | Menambahkan pelanggan |
-| GET | `/api/customers/{id}` | Melihat detail pelanggan |
-| PUT/PATCH | `/api/customers/{id}` | Memperbarui pelanggan |
-| DELETE | `/api/customers/{id}` | Menghapus pelanggan |
-| GET | `/api/staff` | Menampilkan data staf |
-| POST | `/api/staff` | Menambahkan staf |
-| GET | `/api/staff/{id}` | Melihat detail staf |
-| PUT/PATCH | `/api/staff/{id}` | Memperbarui staf |
-| DELETE | `/api/staff/{id}` | Menghapus staf |
-| GET | `/api/products` | Menampilkan data obat |
-| POST | `/api/products` | Menambahkan obat |
-| GET | `/api/products/{id}` | Melihat detail obat |
-| PUT/PATCH | `/api/products/{id}` | Memperbarui obat |
-| DELETE | `/api/products/{id}` | Menghapus obat |
-| GET | `/api/stock-movements` | Melihat riwayat stok |
-| POST | `/api/stock-movements` | Mencatat perubahan stok |
-| GET | `/api/stock-movements/{id}` | Melihat detail pergerakan stok |
+| GET | `/customers` | Menampilkan pelanggan |
+| POST | `/customers` | Menambahkan pelanggan |
+| GET | `/customers/{id}` | Detail pelanggan |
+| PUT | `/customers/{id}` | Mengubah pelanggan |
+| DELETE | `/customers/{id}` | Menghapus pelanggan |
+| GET | `/staff` | Menampilkan staf |
+| POST | `/staff` | Menambahkan staf |
+| GET | `/staff/{id}` | Detail staf |
+| PUT | `/staff/{id}` | Mengubah staf |
+| DELETE | `/staff/{id}` | Menghapus staf |
+| GET | `/products` | Menampilkan obat |
+| POST | `/products` | Menambahkan obat |
+| GET | `/products/{id}` | Detail obat |
+| PUT | `/products/{id}` | Mengubah obat |
+| DELETE | `/products/{id}` | Menghapus obat |
+| GET | `/stock-movements` | Melihat riwayat stok |
+| POST | `/stock-movements` | Mencatat perubahan stok |
+| GET | `/stock-movements/{id}` | Detail riwayat stok |
 
-### Pengujian API dengan Postman
+## 🧪 Pengujian API dengan Postman
 
-Untuk melakukan pengujian:
+Pengujian API dilakukan menggunakan Postman dengan konfigurasi:
 
-1. Jalankan server Laravel.
-2. Buka aplikasi Postman.
-3. Masukkan alamat endpoint sesuai kebutuhan.
-4. Pilih HTTP method yang sesuai.
-5. Tambahkan header:
+**Headers:**
 
 ```text
 Accept: application/json
 Content-Type: application/json
 ```
 
-6. Untuk operasi POST dan PUT, masukkan data pada bagian Body dengan format JSON.
-7. Kirim request dan periksa HTTP status serta respons yang diberikan server.
+Untuk metode POST dan PUT, data dikirim menggunakan format JSON melalui menu Body → raw → JSON.
 
-## Struktur Direktori Project
+Pengujian mencakup operasi CRUD pelanggan, staf, dan obat, serta penambahan, pengeluaran, dan validasi persediaan stok.
+
+## 📁 Struktur Project
 
 ```text
 medicare/
 ├── app/
-│   ├── Http/
-│   │   └── Controllers/
-│   │       └── Api/
+│   ├── Http/Controllers/
 │   └── Models/
-├── bootstrap/
 ├── database/
-│   ├── migrations/
-│   ├── factories/
-│   └── seeders/
-├── public/
+│   └── migrations/
 ├── resources/
 │   └── views/
 ├── routes/
-│   ├── web.php
-│   └── api.php
-├── storage/
+│   ├── api.php
+│   └── web.php
+├── public/
 ├── tests/
 ├── .env.example
 ├── artisan
-└── composer.json
+├── composer.json
+└── README.md
 ```
 
-## Pengembangan dan Kolaborasi
+## 👨‍💻 Repository
 
-Project dikelola menggunakan Git dan GitHub untuk menyimpan perubahan kode, memantau riwayat pengembangan, serta memungkinkan anggota kelompok bekerja bersama melalui fitur repository collaboration.
+GitHub:  
+https://github.com/muhammadhaikall0241-maker/medicare
 
-## Pengembang
-
-Project Kelompok — Mata Kuliah Teknologi Sistem Terintegrasi
-
-**Program Studi:** Teknologi Rekayasa Komputer dan Jaringan  
-**Institusi:** Politeknik Negeri Lhokseumawe
+Project ini dikembangkan untuk keperluan pembelajaran dan praktikum pengembangan aplikasi berbasis web, database, serta integrasi REST API.
 
 ---
 
-*MEDICARE — Integrated Pharmacy Management System.*
+**MEDICARE — Better Care. Smarter Management.**
